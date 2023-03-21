@@ -26,9 +26,10 @@ The first steps are preparing a project:
 - open Visual Studio, and choose to create a new project/solution. Project type: Console (nanoframework).
 - rightclick on 'references' in the project tree, and choose 'manage nuget packages'.
 - install package nanoFramework.System.Device.Wifi and nanoFramework.M2Mqtt
-- in Main() write a method to connect to Wifi (get the first WifiAdapter, then use the Connect method with reconnectionkind Automatic). After connecting check the current IP address with 'NetworkInterface.GetAllNetworkInterfaces()[0].IPv4Address' until it is no longer 0.0.0.0
-- then create a class listen to MQTT topics. The class to use is 'MqttClient' and it has a connect method that uses a unique ID ('(Guid.NewGuid().ToString()') and s username and password to gain access to the MQTT server.
-- use the subscribe method to subscribe to topics, and with Quality of Service level you want, use 'new MqttQoSLevel[] { MqttQoSLevel.ExactlyOnce }' for now.
+- open the Device Explorer (view | other windows | device explorer), choose the connected device and in the top click on Edit Network information (icons might be blank). Enter the Wifi SSID and password.
+- in Main() write a method to connect to Wifi (use WifiNetworkHelper.Reconnect). If the result is true, then a connection has been made.
+- then create a class to listen to MQTT topics. The MQQT class to use is 'MqttClient' and it has a connect method that uses a unique ID ('(Guid.NewGuid().ToString() or your name') and username and password to gain access to the MQTT server.
+- use the subscribe method to subscribe to topics, and with Quality of Service level you want, use 'new MqttQoSLevel[] { MqttQoSLevel.AtLeastOnce }' for now.
 - use the MqttMsgPublishReceived event to listen for messages (_broker.MqttMsgPublishedReceived += (and press tab to create a new method)).
 - in this new method, use Debug.WriteLine to write the results to the debug console.
 - run the program on the device and watch the logs

@@ -39,8 +39,6 @@ namespace NanoGameClient
             }
         }
 
-        private static string GetIP() => NetworkInterface.GetAllNetworkInterfaces()[0].IPv4Address;
-
         /// <summary>
         /// This is a helper function to pick up first available network interface and use it for communication.
         /// </summary>
